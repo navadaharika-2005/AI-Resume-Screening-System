@@ -51,11 +51,15 @@ nlp, skill_matcher, embedder = load_models()
 # ---------------------------------------------------------------------------
 # Header
 # ---------------------------------------------------------------------------
-st.title("📄 AI-Based Resume Screening System")
+st.title("📄 AI Resume Screening System")
 st.markdown(
-    "Upload a job description and a batch of resumes. The system will "
-    "**rank candidates by semantic relevance** and explain exactly "
-    "**why** each one matched (or didn't)."
+    "An AI-powered resume screening platform that analyzes job descriptions "
+    "and candidate resumes, ranks candidates using semantic similarity, "
+    "and provides explainable skill-matching insights."
+)
+st.info(
+    "Purpose: Help recruiters quickly identify relevant candidates "
+    "while keeping the final hiring decision with a human reviewer."
 )
 st.divider()
 
