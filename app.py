@@ -192,42 +192,58 @@ if run_button:
     )
 
     st.divider()
-    st.subheader("🔍 Detailed, Explainable Insights per Candidate")
     st.subheader("📊 Screening Summary")
 
     summary_col1, summary_col2, summary_col3 = st.columns(3)
 
     with summary_col1:
-      st.metric("Resumes Screened", len(ranked_results))
+        st.metric("Resumes Screened", len(ranked_results))
 
     with summary_col2:
-      st.metric(
-        "Top Match",
-        f"{ranked_results[0]['score'] * 100:.1f}%"
-    )
+        st.metric(
+            "Top Match",
+            f"{ranked_results[0]['score'] * 100:.1f}%"
+        )
 
-with summary_col3:
-    st.metric(
-        "Top Candidate",
-        ranked_results[0]["name"]
-    )
+    with summary_col3:
+        st.metric(
+            "Top Candidate",
+            ranked_results[0]["name"]
+        )
+
+    st.divider()
+    st.subheader("🔍 Detailed, Explainable Insights per Candidate")
 
     for i, r in enumerate(ranked_results):
-        with st.expander(f"#{i+1} — {r['name']}  (Score: {round(r['score']*100, 1)}%)"):
+        with st.expander(
+            f"#{i+1} — {r['name']} "
+            f"(Score: {round(r['score'] * 100, 1)}%)"
+        ):
             st.write(r["summary"])
 
             col_a, col_b, col_c = st.columns(3)
+
             with col_a:
                 st.markdown("**✅ Matched Skills**")
-                st.write(", ".join(r["matched_skills"]) or "None found")
+                st.write(
+                    ", ".join(r["matched_skills"]) or "None found"
+                )
+
             with col_b:
                 st.markdown("**❌ Missing Skills**")
-                st.write(", ".join(r["missing_skills"]) or "None — full match!")
+                st.write(
+                    ", ".join(r["missing_skills"])
+                    or "None — full match!"
+                )
+
             with col_c:
                 st.markdown("**➕ Extra Skills (bonus)**")
-                st.write(", ".join(r["extra_skills"]) or "None")
-    else:
-      st.info(
+                st.write(
+                    ", ".join(r["extra_skills"]) or "None"
+                )
+
+else:
+    st.info(
         "👆 Fill in the job description and upload resumes, then click "
         "**'Run Screening'** to see ranked results."
     )
